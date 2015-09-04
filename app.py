@@ -26,6 +26,12 @@ def index():
             db.task.update({'descript': old_task}, {'$set': {'descript': new_task}})
             return redirect('/', code=302)
 
+        if request.form['form_name'] == 'edit_status':
+            task_id = request.form['task_id']
+            status = request.form['task_status']
+            db.task.update({'_id': ObjectId(task_id)}, {'$set': {'status': status}})
+            return redirect('/', code=302)
+
         if request.form['form_name'] == 'delete_task':
             task_id = request.form['task_id']
             db.task.remove({'_id': ObjectId(task_id)})

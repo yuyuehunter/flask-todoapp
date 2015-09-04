@@ -48,7 +48,17 @@
                     </td>
                     <td>
                         {{task['status']}}
-                        <a href="#"><i class="fa fa-pencil"></i></a>
+                        <a href="#" onclick="edit_task('{{task['_id']}}status')"><i class="fa fa-pencil"></i></a>
+                        <form method="POST" action="/" style="display: None" id="{{task['_id']}}status">
+                            <input style="display: None" name="form_name" value="edit_status">
+                            <input style="display: None" name="task_id" value="{{task['_id']}}">
+                            <select class="form-control" name="task_status">
+                                <option value="TODO">TODO</option>
+                                <option value="DOING">DOING</option>
+                                <option value="DONE">DONE</option>
+                            </select>
+                            <input type="submit" class="btn btn-success" value="Edit">
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}
