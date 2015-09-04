@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block body %}
+    <div class="container center-block">
+        <h1>Todo List</h1>
+
+        <div>
+            <form method="post" action="">
+                <input name="task" type="text" placeholder="Task to do" class="form-control">
+                <button action="submit" class="btn btn-success btn-lg">Let's do this!</button>
+            </form>
+        </div>
+
+        <div>
+            <table class="table table-condensed">
+                <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                </tr>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{task['descript']}}</td>
+                    <td>{{task['status']}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+    {{task}}
+{% endblock %}
