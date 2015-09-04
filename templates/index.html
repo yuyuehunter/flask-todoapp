@@ -8,7 +8,7 @@
             <form method="post" action="/">
                 <input style="display: None" name="form_name" value="add">
                 <input name="task" type="text" placeholder="Task to do" class="form-control">
-                <button action="submit" class="btn btn-success btn-lg">Let's do this! <i class="fa fa-check"></i></button>
+                <button action="submit" class="btn btn-primary">Let's do this! <i class="fa fa-check"></i></button>
             </form>
         </div>
 
@@ -33,7 +33,7 @@
                         <form method="POST" action="/">
                             <input style="display: None" name="form_name" value="delete_task">
                             <input style="display: None" name="task_id" value="{{task['_id']}}">
-                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                            <button type="submit" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
                     <td>
@@ -47,7 +47,18 @@
                         </form>
                     </td>
                     <td>
-                        {{task['status']}}
+                        {% if task['status'] == 'DONE' %}
+                            <span class="label label-success">{{task['status']}}</span>
+                        {% endif %}
+
+                        {% if task['status'] == 'DOING' %}
+                            <span class="label label-warning">{{task['status']}}</span>
+                        {% endif %}
+
+                        {% if task['status'] == 'TODO' %}
+                            <span class="label label-danger">{{task['status']}}</span>
+                        {% endif %}
+
                         <a href="#" onclick="edit_task('{{task['_id']}}status')"><i class="fa fa-pencil"></i></a>
                         <form method="POST" action="/" style="display: None" id="{{task['_id']}}status">
                             <input style="display: None" name="form_name" value="edit_status">
