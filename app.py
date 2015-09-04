@@ -4,6 +4,7 @@ from flask import (
     request, 
     redirect
 )
+from bson.objectid import ObjectId
 from db import Database
 
 app = Flask(__name__)
@@ -26,8 +27,8 @@ def index():
             return redirect('/', code=302)
 
         if request.form['form_name'] == 'delete_task':
-            task = request.form['task']
-            db.task.remove({'descript': task})
+            task_id = request.form['task_id']
+            db.task.remove({'_id': ObjectId(task_id)})
             return redirect('/', code=302)
 
     for t in db.task.find():

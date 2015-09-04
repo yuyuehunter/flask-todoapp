@@ -8,7 +8,7 @@
             <form method="post" action="/">
                 <input style="display: None" name="form_name" value="add">
                 <input name="task" type="text" placeholder="Task to do" class="form-control">
-                <button action="submit" class="btn btn-success btn-lg">Let's do this!</button>
+                <button action="submit" class="btn btn-success btn-lg">Let's do this! <i class="fa fa-check"></i></button>
             </form>
         </div>
 
@@ -32,7 +32,7 @@
                     <td>
                         <form method="POST" action="/">
                             <input style="display: None" name="form_name" value="delete_task">
-                            <input style="display: None" name="task" value="{{task['descript']}}">
+                            <input style="display: None" name="task_id" value="{{task['_id']}}">
                             <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                         </form>
                     </td>
