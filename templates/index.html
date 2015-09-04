@@ -5,26 +5,54 @@
         <h1>Todo List</h1>
 
         <div>
-            <form method="post" action="">
+            <form method="post" action="/">
+                <input style="display: None" name="form_name" value="add">
                 <input name="task" type="text" placeholder="Task to do" class="form-control">
                 <button action="submit" class="btn btn-success btn-lg">Let's do this!</button>
             </form>
         </div>
 
+        <script type="text/javascript">
+            function edit_task(elem) {
+                $('#'+elem).fadeIn("slow", function() {
+                    document.getElementById(elem).style = "display: block";
+                });
+            }
+        </script>
+
         <div>
             <table class="table table-condensed">
                 <tr>
+                    <th>#</th>
                     <th>Task</th>
                     <th>Status</th>
                 </tr>
                 {% for task in tasks %}
                 <tr>
-                    <td>{{task['descript']}}</td>
-                    <td>{{task['status']}}</td>
+                    <td>
+                        <form method="POST" action="/">
+                            <input style="display: None" name="form_name" value="delete_task">
+                            <input style="display: None" name="task" value="{{task['descript']}}">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                        </form>
+                    </td>
+                    <td>
+                        {{task['descript']}}
+                        <a href="#" onclick="edit_task('{{task['_id']}}')"><i class="fa fa-pencil"></i></a>
+                        <form method="POST" action="/" style="display: None" id="{{task['_id']}}">
+                            <input style="display: None" name="form_name" value="edit_task">
+                            <input style="display: None" name="old_task" value="{{task['descript']}}">
+                            <input name="task" type="text" class="form-control" value="{{task['descript']}}">
+                            <input type="submit" class="btn btn-success" value="Edit">
+                        </form>
+                    </td>
+                    <td>
+                        {{task['status']}}
+                        <a href="#"><i class="fa fa-pencil"></i></a>
+                    </td>
                 </tr>
                 {% endfor %}
             </table>
         </div>
     </div>
-    {{task}}
 {% endblock %}

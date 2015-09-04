@@ -14,9 +14,21 @@ def index():
     task = None
     tasks = []
     if request.method == 'POST':
-        task = request.form['task']
-        db.task.insert({"descript": task, "status": "TODO"})
-        return redirect('/', code=302)
+        if request.form['form_name'] == 'add':
+            task = request.form['task']
+            db.task.insert({"descript": task, "status": "TODO"})
+            return redirect('/', code=302)
+
+        if request.form['form_name'] == 'edit_task':
+            old_task = request.form['old_task']
+            new_task = request.form['task']
+            db.task.update({'descript': old_task}, {'$set': {'descript': new_task}})
+            return redirect('/', code=302)
+
+        if request.form['form_name'] == 'delete_task':
+            task = request.form['task']
+            db.task.remove({'descript': task})
+            return redirect('/', code=302)
 
     for t in db.task.find():
         tasks.append(t)
